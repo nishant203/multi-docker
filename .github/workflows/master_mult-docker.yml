@@ -27,32 +27,40 @@ jobs:
         password: ${{ secrets.DOCKERPASSWORD }}
 
     - name: Build and push client project
+      run: |
+        cd ./client 
       uses: docker/build-push-action@v2
       with:
         push: true
         tags: index.docker.io/${{ secrets.DOCKERUSERNAME }}/react-test:${{ github.sha }}
-        file: ./client/Dockerfile
+        file: ./Dockerfile
    
     - name: Build and push nginx project
+      run: |
+        cd ./nginx 
       uses: docker/build-push-action@v2
       with:
         push: true
         tags: index.docker.io/${{ secrets.DOCKERUSERNAME }}/react-test:${{ github.sha }}
-        file: ./nginx/Dockerfile
+        file: ./Dockerfile
     
     - name: Build and push server project
+      run: |
+        cd ./server 
       uses: docker/build-push-action@v2
       with:
         push: true
         tags: index.docker.io/${{ secrets.DOCKERUSERNAME }}/react-test:${{ github.sha }}
-        file: ./server/Dockerfile
+        file: ./Dockerfile
     
     - name: Build and push worker project
+      run: |
+        cd ./worker   
       uses: docker/build-push-action@v2
       with:
         push: true
         tags: index.docker.io/${{ secrets.DOCKERUSERNAME }}/react-test:${{ github.sha }}
-        file: ./server/Dockerfile
+        file: ./Dockerfile
 
   # deploy:
   #   runs-on: ubuntu-latest
